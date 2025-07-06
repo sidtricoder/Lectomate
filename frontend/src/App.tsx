@@ -8,7 +8,8 @@ import {
   Card,
   SimpleGrid,
   ThemeIcon,
-  Center
+  Center,
+  Box
 } from '@mantine/core'
 import { 
   IconUpload, 
@@ -18,6 +19,7 @@ import {
 } from '@tabler/icons-react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import UploadPage from './pages/UploadPage'
+import BackgroundWaves from './components/BackgroundWaves'
 import './App.css'
 
 function HomePage() {
@@ -37,10 +39,14 @@ function HomePage() {
             variant="gradient"
             gradient={{ from: 'blue', to: 'cyan', deg: 45 }}
             ta="center"
+            style={{ 
+              textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.3))'
+            }}
           >
             🎓 Lectomate
           </Text>
-          <Text size="xl" c="dimmed" ta="center" maw={600}>
+          <Text size="xl" c="dimmed" ta="center" maw={600} style={{ color: 'rgba(255,255,255,0.9)' }}>
             Transform your PDFs and PowerPoints into engaging educational videos 
             with AI-generated scripts, animations, and your own voice!
           </Text>
@@ -50,6 +56,10 @@ function HomePage() {
             variant="gradient"
             gradient={{ from: 'blue', to: 'cyan' }}
             onClick={handleGetStarted}
+            style={{ 
+              boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+              backdropFilter: 'blur(10px)'
+            }}
           >
             Start Creating Your Lecture
           </Button>
@@ -57,12 +67,22 @@ function HomePage() {
       </Center>
 
       {/* Features Section */}
-      <Title order={2} ta="center" mb="xl" c="blue">
+      <Title order={2} ta="center" mb="xl" style={{ color: 'white', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
         How It Works
       </Title>
       
       <SimpleGrid cols={{ base: 1, md: 2, lg: 4 }} spacing="lg">
-        <Card padding="lg" radius="md" withBorder>
+        <Card 
+          padding="lg" 
+          radius="md" 
+          withBorder
+          style={{ 
+            backgroundColor: 'rgba(255,255,255,0.1)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.1)'
+          }}
+        >
           <ThemeIcon 
             size="xl" 
             radius="md" 
@@ -72,15 +92,25 @@ function HomePage() {
           >
             <IconUpload size={24} />
           </ThemeIcon>
-          <Text fw={500} size="lg" mb="xs">
+          <Text fw={500} size="lg" mb="xs" style={{ color: 'white' }}>
             1. Upload Content
           </Text>
-          <Text size="sm" c="dimmed">
+          <Text size="sm" style={{ color: 'rgba(255,255,255,0.8)' }}>
             Upload your PDF textbook chapter or PowerPoint presentation
           </Text>
         </Card>
 
-        <Card padding="lg" radius="md" withBorder>
+        <Card 
+          padding="lg" 
+          radius="md" 
+          withBorder
+          style={{ 
+            backgroundColor: 'rgba(255,255,255,0.1)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.1)'
+          }}
+        >
           <ThemeIcon 
             size="xl" 
             radius="md" 
@@ -90,15 +120,25 @@ function HomePage() {
           >
             <IconMicrophone size={24} />
           </ThemeIcon>
-          <Text fw={500} size="lg" mb="xs">
+          <Text fw={500} size="lg" mb="xs" style={{ color: 'white' }}>
             2. Record Voice
           </Text>
-          <Text size="sm" c="dimmed">
+          <Text size="sm" style={{ color: 'rgba(255,255,255,0.8)' }}>
             Provide a short voice sample for AI voice cloning
           </Text>
         </Card>
 
-        <Card padding="lg" radius="md" withBorder>
+        <Card 
+          padding="lg" 
+          radius="md" 
+          withBorder
+          style={{ 
+            backgroundColor: 'rgba(255,255,255,0.1)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.1)'
+          }}
+        >
           <ThemeIcon 
             size="xl" 
             radius="md" 
@@ -108,15 +148,25 @@ function HomePage() {
           >
             <IconBrain size={24} />
           </ThemeIcon>
-          <Text fw={500} size="lg" mb="xs">
+          <Text fw={500} size="lg" mb="xs" style={{ color: 'white' }}>
             3. AI Processing
           </Text>
-          <Text size="sm" c="dimmed">
+          <Text size="sm" style={{ color: 'rgba(255,255,255,0.8)' }}>
             AI generates script, animations, and voice narration
           </Text>
         </Card>
 
-        <Card padding="lg" radius="md" withBorder>
+        <Card 
+          padding="lg" 
+          radius="md" 
+          withBorder
+          style={{ 
+            backgroundColor: 'rgba(255,255,255,0.1)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.1)'
+          }}
+        >
           <ThemeIcon 
             size="xl" 
             radius="md" 
@@ -126,10 +176,10 @@ function HomePage() {
           >
             <IconVideo size={24} />
           </ThemeIcon>
-          <Text fw={500} size="lg" mb="xs">
+          <Text fw={500} size="lg" mb="xs" style={{ color: 'white' }}>
             4. Get Video
           </Text>
-          <Text size="sm" c="dimmed">
+          <Text size="sm" style={{ color: 'rgba(255,255,255,0.8)' }}>
             Download your professional educational video
           </Text>
         </Card>
@@ -142,6 +192,12 @@ function HomePage() {
             size="lg" 
             variant="outline" 
             color="blue"
+            style={{ 
+              backgroundColor: 'rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.3)',
+              color: 'white'
+            }}
           >
             See Example
           </Button>
@@ -150,6 +206,10 @@ function HomePage() {
             variant="gradient"
             gradient={{ from: 'blue', to: 'purple' }}
             onClick={handleGetStarted}
+            style={{ 
+              boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+              backdropFilter: 'blur(10px)'
+            }}
           >
             Get Started Now
           </Button>
@@ -161,10 +221,15 @@ function HomePage() {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/upload" element={<UploadPage />} />
-    </Routes>
+    <>
+      <BackgroundWaves />
+      <Box style={{ position: 'relative', zIndex: 1 }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/upload" element={<UploadPage />} />
+        </Routes>
+      </Box>
+    </>
   )
 }
 

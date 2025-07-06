@@ -19,9 +19,12 @@ import {
   IconFileTypePdf,
   IconPresentation,
   IconCheck,
+  IconSend,
+  IconVideo,
 } from '@tabler/icons-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import VoiceRecorder from '../components/VoiceRecorder'
 
 function UploadPage() {
   const navigate = useNavigate()
@@ -29,6 +32,10 @@ function UploadPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isUploading, setIsUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
+  const [voiceData, setVoiceData] = useState<{
+    blob: Blob | null
+    url: string
+  }>({ blob: null, url: '' })
 
   // Handle file drop
   const handleDrop = (droppedFiles: File[]) => {
@@ -53,6 +60,26 @@ function UploadPage() {
         return prev + 10
       })
     }, 200)
+  }
+
+  // Handle voice ready
+  const handleVoiceReady = (audioBlob: Blob, audioUrl: string) => {
+    setVoiceData({ blob: audioBlob, url: audioUrl })
+  }
+
+  // Handle voice remove
+  const handleVoiceRemove = () => {
+    setVoiceData({ blob: null, url: '' })
+  }
+
+  // Start final processing
+  const startFinalProcessing = async () => {
+    setActiveStep(3)
+    
+    // Simulate processing time
+    setTimeout(() => {
+      setActiveStep(4) // Final step
+    }, 5000)
   }
 
   return (
@@ -91,6 +118,11 @@ function UploadPage() {
           label="Processing"
           description="AI generation"
           icon={<IconCheck size={18} />}
+        />
+        <Stepper.Step
+          label="Complete"
+          description="Download video"
+          icon={<IconVideo size={18} />}
         />
       </Stepper>
 
@@ -208,26 +240,94 @@ function UploadPage() {
         </Card>
       )}
 
-      {/* Step 3: Voice Recording (Preview) */}
+      {/* Step 3: Voice Recording */}
       {activeStep === 2 && (
+        <>
+          <VoiceRecorder 
+            onVoiceReady={handleVoiceReady}
+            onVoiceRemove={handleVoiceRemove}
+          />
+          
+          {voiceData.blob && (
+            <Center mt="lg">
+              <Button
+                size="lg"
+                variant="gradient"
+                gradient={{ from: 'green', to: 'teal' }}
+                leftSection={<IconSend size={18} />}
+                onClick={startFinalProcessing}
+              >
+                Generate Lecture Video
+              </Button>
+            </Center>
+          )}
+        </>
+      )}
+
+      {/* Step 4: Final Processing */}
+      {activeStep === 3 && (
+        <Card padding="xl" radius="md" withBorder>
+          <Stack gap="lg">
+            <div>
+              <Text fw={500} size="lg" mb="xs">
+                🤖 AI is Creating Your Lecture
+              </Text>
+              <Text size="sm" c="dimmed">
+                This may take a few minutes. We're generating your script, animations, and video...
+              </Text>
+            </div>
+
+            <Stack gap="md">
+              <Progress 
+                value={100} 
+                size="xl" 
+                radius="xl"
+                animated
+                color="blue"
+              />
+              <Text ta="center" size="sm" c="dimmed">
+                🧠 Analyzing content structure...
+              </Text>
+              <Text ta="center" size="sm" c="dimmed">
+                📝 Generating engaging script...
+              </Text>
+              <Text ta="center" size="sm" c="dimmed">
+                🎭 Creating Manim animations...
+              </Text>
+              <Text ta="center" size="sm" c="dimmed">
+                🎤 Cloning your voice...
+              </Text>
+              <Text ta="center" size="sm" c="dimmed">
+                🎬 Compiling final video...
+              </Text>
+            </Stack>
+          </Stack>
+        </Card>
+      )}
+
+      {/* Step 5: Complete */}
+      {activeStep === 4 && (
         <Card padding="xl" radius="md" withBorder>
           <Stack gap="lg">
             <Alert
               icon={<IconCheck size={16} />}
-              title="Content Processed Successfully!"
+              title="🎉 Your Lecture Video is Ready!"
               color="green"
               variant="light"
             >
-              Your file has been analyzed and is ready for voice recording.
+              Your AI-generated educational video has been created successfully!
             </Alert>
 
             <div>
               <Text fw={500} size="lg" mb="xs">
-                Next: Record Your Voice Sample
+                Your Lecture Features:
               </Text>
-              <Text size="sm" c="dimmed">
-                This feature will be available in the next step. We'll implement voice recording next!
-              </Text>
+              <Stack gap="xs">
+                <Text size="sm">✅ AI-generated script from your content</Text>
+                <Text size="sm">✅ Voice cloned from your sample</Text>
+                <Text size="sm">✅ Manim animations for complex concepts</Text>
+                <Text size="sm">✅ Professional video compilation</Text>
+              </Stack>
             </div>
 
             <Group justify="center">
@@ -235,14 +335,15 @@ function UploadPage() {
                 variant="outline"
                 onClick={() => navigate('/')}
               >
-                Back to Home
+                Create Another Lecture
               </Button>
               <Button
+                size="lg"
                 variant="gradient"
-                gradient={{ from: 'blue', to: 'purple' }}
-                disabled
+                gradient={{ from: 'green', to: 'teal' }}
+                leftSection={<IconDownload size={18} />}
               >
-                Continue to Voice Recording (Coming Soon)
+                Download Video
               </Button>
             </Group>
           </Stack>

@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
+import models.file_details
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import os
@@ -57,6 +58,8 @@ async def upload_document(file: UploadFile=File(...)):
 async def upload_voice_sample(file: UploadFile = File(...)):
     # Validate audio file
     allowed_audio_types = ["audio/wav", "audio/mp3", "audio/mpeg", "audio/m4a"]
+
+
     
     if file.content_type not in allowed_audio_types:
         raise HTTPException(status_code=400, detail="Invalid audio file type.")

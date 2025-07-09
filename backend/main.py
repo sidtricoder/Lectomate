@@ -1,5 +1,5 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
-import app.models.file_details
+import app.models.file_details as fd
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import os
@@ -39,12 +39,12 @@ async def health_check():
 #File upload endpoint for PDF and Powerpoint
 @app.post("/upload/document")
 async def upload_document(file: UploadFile=File(...)):
-    allowed_types = ["application/pdf",
-                     "application/vnd.ms-powerpoint",
-                     "application/vnd.openxmlformats-officedocument.presentationml.presentation"]
+    allowed_types = ["application/pdf"]
     
     if file.content_type not in allowed_types:
-        raise HTTPException(status_code=400, detail="Invalid file type. Only PDF and Powerpoint files are allowed.")
+        raise HTTPException(status_code=400, detail="Invalid file type. Only PDF files are allowed.")
+    
+    fd.print_file(file)
     
     return {
         "message" : "Document uploaded successfully",

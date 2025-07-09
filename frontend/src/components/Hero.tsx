@@ -34,6 +34,13 @@ const Hero: React.FC = () => {
         transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto"
       >
+        <div className="flex items-center justify-center mb-6">
+          <img 
+            src="/icon.png" 
+            alt="Lectomate" 
+            className="h-24 w-24 object-contain mr-4"
+          />
+        </div>
         <h2 className="text-5xl md:text-6xl font-bold mb-6">
           Transform Your Content Into
           <span className="block bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">

@@ -15,9 +15,16 @@ const Footer: React.FC = () => {
         >
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Lectomate
-            </h3>
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src="/icon.png" 
+                alt="Lectomate" 
+                className="h-10 w-10 object-contain"
+              />
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Lectomate
+              </h3>
+            </div>
             <p className="text-gray-300 mb-4 max-w-md">
               Transforming educational content creation with AI-powered lecture generation, 
               voice cloning, and dynamic animations.

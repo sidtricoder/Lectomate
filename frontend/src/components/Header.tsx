@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 const Header: React.FC = () => {
   const location = useLocation();
@@ -23,7 +23,11 @@ const Header: React.FC = () => {
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <div className="relative">
-                <BookOpen className="h-8 w-8 text-blue-600" />
+                <img 
+                  src="/icon.png" 
+                  alt="Lectomate" 
+                  className="h-12 w-12 object-contain"
+                />
                 <Sparkles className="h-4 w-4 text-pink-500 absolute -top-1 -right-1 animate-pulse" />
               </div>
               <div>
